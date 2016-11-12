@@ -247,6 +247,7 @@ def main():
                 traverse_and_mark_linear_paths(graph, nk, stop_bf, pathy,
                                                degree_nodes)
 
+    pathy.mxtfp.close()
     print(len(pathy.nodes), 'segments, containing',
               sum(pathy.nodes.values()), 'nodes')
 
@@ -269,7 +270,11 @@ def main():
                 for kmer in all_kmers:
                     pathy.add_label(kmer, n)
 
-
+    from pickle import dump
+    with open(gxtfile + '.pickle', 'wb') as fp:
+        pathy.mxtfp = None
+        dump(pathy, fp)
+                    
     # save to GXT/MXT.
     print('saving gxtfile', gxtfile)
 
@@ -298,6 +303,8 @@ def main():
         print('note: used/assigned %d labels total' % (len(set(all_labels)),))
         print('counts:', label_counts)
 
+    print(len(pathy.nodes))
 
+        
 if __name__ == '__main__':
     main()

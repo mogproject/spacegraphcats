@@ -11,6 +11,13 @@ cdef class intset:
      def __iter__(self):
          return iter(self.values)
 
+     def __getstate__(self):
+         return list(self.values)
+
+     def __setstate__(self, x):
+         for k in x:
+            self.values.insert(k)
+
 cdef class string_int_map:
      cdef public map[string, int] values
 
@@ -58,6 +65,13 @@ cdef class int_int_map:
 
      def __contains__(self, k):
          return self._values.count(k)
+
+     def __getstate__(self):
+         return list(self.items())
+
+     def __setstate__(self, x):
+         for k, v in x:
+             self[k] = v
 
 cdef class int_intset_map:
      cdef public map[long, set[int]] _values
