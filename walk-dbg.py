@@ -279,7 +279,7 @@ def main():
         w = graph_parser.Writer(fp, ['labels'], [])
 
         for k, v in pathy.nodes.items():
-            kmer = pathy.nodes_to_kmers.get(k)
+            kmer = pathy.nodes_to_kmers[k]
             l = ""
             if kmer:
                 labels = pathy.labels.get(kmer)
