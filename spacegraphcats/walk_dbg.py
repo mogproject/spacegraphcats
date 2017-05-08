@@ -1,3 +1,6 @@
+"""
+Build the contracted De Bruijn graph.
+"""
 from __future__ import print_function
 
 import sys
@@ -37,14 +40,18 @@ class Pathfinder(object):
         self.nodes_to_kmers[this_id] = kmer
         self.kmers_to_nodes[kmer] = this_id
 
-        
-
         return this_id
 
     def new_linear_node(self):
         "Add a new linear path to the cDBG."
         node_id = self.node_counter
         self.node_counter += 1
+
+        # @CTB hackity hack hack
+        if node_id % 1000 == 0:
+            self.adjfp.fluish()
+            if self.assemblyfp:
+                self.assemblyfp.flush()
 
         return node_id
 
