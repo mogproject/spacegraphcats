@@ -49,7 +49,7 @@ class Pathfinder(object):
 
         # @CTB hackity hack hack
         if node_id % 1000 == 0:
-            self.adjfp.fluish()
+            self.adjfp.flush()
             if self.assemblyfp:
                 self.assemblyfp.flush()
 
