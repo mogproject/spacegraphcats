@@ -36,7 +36,6 @@ class Pathfinder(object):
         this_id = self.node_counter
         self.node_counter += 1
 
-        self.nodes[this_id] = 1
         self.nodes_to_kmers[this_id] = kmer
         self.kmers_to_nodes[kmer] = this_id
 
@@ -220,8 +219,7 @@ def run(args):
                 traverse_and_mark_linear_paths(graph, nk, stop_bf, pathy,
                                                degree_nodes)
 
-    print(len(pathy.nodes), 'segments, containing',
-              sum(pathy.nodes.values()), 'nodes')
+    print(len(pathy.nodes_to_kmers), 'segments')
 
     del graph
     del stop_bf
