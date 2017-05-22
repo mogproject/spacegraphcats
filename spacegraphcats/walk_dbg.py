@@ -169,6 +169,8 @@ def run(args):
         print('(and labeling them, per request)')
     degree_nodes = khmer.HashSet(ksize)
     n = 0
+    hdn_per_reads = defaultdict(int)
+
     for seqfile in args.seqfiles:
         for record in screed.open(seqfile):
             if len(record.sequence) < ksize: continue
@@ -178,6 +180,7 @@ def run(args):
             # walk across sequences, find all high degree nodes,
             # name them and cherish them.
             these_hdn = graph.find_high_degree_nodes(record.sequence)
+            hdn_per_reads[len(these_hdn)] += 1
             degree_nodes += these_hdn
             if args.label:
                 label_list.append(record.name)
@@ -267,3 +270,5 @@ def run(args):
         with open(label_file, "wt") as fp:
             for n, label in enumerate(label_list):
                 fp.write("{} {}\n".format(n + 0, label))
+
+    print(hdn_per_reads)
