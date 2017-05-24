@@ -280,4 +280,8 @@ def run(args):
             for n, label in enumerate(label_list):
                 fp.write("{} {}\n".format(n + 0, label))
 
-    print(hdn_per_reads)
+    hdn_file = os.path.basename(output_dir) + '.hdn.csv'
+    with open(hdn_file, 'wt') as fp:
+        fp.write('hdn_count,n_reads\n')
+        for k, v in hdn_per_reads.items():
+            fp.write('{},{}\n'.format(k, v))
