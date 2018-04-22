@@ -38,16 +38,12 @@ def main():
     total_seqs = 0
 
     print('extracting contigs to {}.'.format(outname))
-    for n, record in enumerate(screed.open(contigs)):
+    for n, record in enumerate(search_utils.get_contigs_by_cdbg(contigs, cdbg_shadow)):
         if n % 10000 == 0:
             offset_f = total_seqs / len(cdbg_shadow)
             print('...at n {} ({:.1f}% of shadow)'.format(total_seqs,
                                                           offset_f * 100),
                   end='\r')
-
-        contig_id = int(record.name)
-        if contig_id not in cdbg_shadow:
-            continue
 
         outfp.write('>{}\n{}\n'.format(record.name, record.sequence))
 
