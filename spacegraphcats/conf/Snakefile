@@ -115,7 +115,7 @@ rule bcalm_cdbg:
      output:
         "{catlas_base}/bcalm.{catlas_base}.k{ksize}.unitigs.fa"
      shell:
-        "(bcalm -in {input} -out {catlas_base}/bcalm.{catlas_base}.k{wildcards.ksize} -kmer-size {wildcards.ksize} -abundance-min 1 >& {output}.log.txt && rm -f {catlas_base}/bcalm.{catlas_base}.k{wildcards.ksize}.{{h5,unitigs.fa.glue*}}) || printf '**\\n**\\n** Cannot run BCALM 2! Please install it and make sure it is on your path!\\n**\\n**\\n'"
+        "(bcalm -in {input} -out {catlas_base}/bcalm.{catlas_base}.k{wildcards.ksize} -kmer-size {wildcards.ksize} -abundance-min 2 >& {output}.log.txt && rm -f {catlas_base}/bcalm.{catlas_base}.k{wildcards.ksize}.{{h5,unitigs.fa.glue*}}) || printf '**\\n**\\n** Cannot run BCALM 2! Please install it and make sure it is on your path!\\n**\\n**\\n'"
 
 # create list of input files for bcalm
 rule bcalm_cdbg_inpfiles:
